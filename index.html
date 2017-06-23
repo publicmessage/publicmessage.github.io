@@ -52,6 +52,17 @@
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
+        <div class="container well">
+            <header>
+                <h1>
+                    Read public messages by the best hackers at Queens College and beyond!
+                </h1>
+                <header>
+        </div>
+    </div>
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
         <div class="container">
             <form>
                 <div class="form-group">
@@ -85,6 +96,25 @@
     </div>
 
 
+
+    <hr>
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+        <div class="container">
+            <header>
+                <h1>Want to see your own messages here?</h1>
+            </header>
+            <p>
+                Do a <pre>curl</pre> from your terminal! Here's an example to create a new author:
+            </p>
+            <pre>curl -i -H "Content-Type: application/json" -X POST -d '{"author_id": 2, "full_name": "董仲舒", "email": "dongzhonshu@qq.com"}' https://publicmessage.herokuapp.com/api/v0/author/</pre>
+            <p>
+                After you have an author id, you can go ahead and post your message:
+                <pre>curl -i -H "Content-Type: application/json" -X POST -d '{"message_id": 3, "author_id": 4, "message": "good morning 5"}' https://publicmessage.herokuapp.com/api/v0/message/</pre>
+            </p>
+        </div>
+    </div>
 
     <hr>
 

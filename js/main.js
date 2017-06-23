@@ -4,7 +4,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
     inputTextboxMessage.addEventListener('keydown', (function(e) {
         preventEnter(e);
         getMessage(inputTextboxMessage);
-        sendData();
     }));
     inputTextboxAuthor.addEventListener('keydown', (function(e) {
         preventEnter(e);
@@ -24,7 +23,11 @@ function getMessage(inputTextboxMessage) {
                 // Success!
                 let data = JSON.parse(this.response);
                 console.log(data);
-                $('#resultMessage').html(`Someone posted <br> ${data.message} <br> with message id of ${data.id} and author id of ${data.author_id}`);
+                if (data.error !== "Not found") {
+                    $('#resultMessage').html(`Someone posted <br> ${data.message} <br> with message id of ${data.id} and author id of ${data.author_id}`);
+                } else {
+                    $('#resultMessage').html(`Could not find the message. Hurry, you might be able to snag message id of  ${inputTextboxMessage.value} and claim your spot in hacker fame!`);
+                }
             } else {
                 // We reached our target server, but it returned an error
                 console.log(`Something is wrong with query ${inputTextboxMessage.value}`);
@@ -50,7 +53,11 @@ function getAuthor(inputTextboxAuthor) {
                 // Success!
                 let data = JSON.parse(this.response);
                 console.log(data);
-                $('#resultAuthor').html(`Some information about author with id ${data.id} follows: <br> Full name: ${data.full_name} <br> Email: ${data.email}`);
+                if (data.error !== "Not found") {
+                    $('#resultAuthor').html(`Some information about author with id ${data.id} follows: <br> Full name: ${data.full_name} <br> Email: ${data.email}`);
+                } else {
+                    $('#resultAuthor').html(`Could not find anyone with that author id. Hurry, you could be the super warrior of ${inputTextboxAuthor.value} and claim your spot in hacker fame!`);
+                }
             } else {
                 // We reached our target server, but it returned an error
                 console.log(`Something is wrong with query ${inputTextboxAuthor.value}`);
@@ -70,19 +77,4 @@ function preventEnter(e) {
         event.preventDefault();
         return false;
     }
-}
-
-function sendData() {
-    $.ajax({
-        url: 'https://publicmessage.herokuapp.com/api/v0/message/',
-        type: 'POST',
-        data: {
-            json: JSON.stringify({
-                message_id: 2,
-                author_id: 1,
-                message: "你好"
-            })
-        },
-        dataType: 'json'
-    });
 }
