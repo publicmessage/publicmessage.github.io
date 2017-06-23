@@ -106,12 +106,15 @@
                 <h1>Want to see your own messages here?</h1>
             </header>
             <p>
-                Do a <pre>curl</pre> from your terminal! Here's an example to create a new author:
+                <pre>curl</pre> from your terminal! Here's an example to create a new author:
             </p>
             <pre>curl -i -H "Content-Type: application/json" -X POST -d '{"author_id": 2, "full_name": "董仲舒", "email": "dongzhonshu@qq.com"}' https://publicmessage.herokuapp.com/api/v0/author/</pre>
             <p>
                 After you have an author id, you can go ahead and post your message:
                 <pre>curl -i -H "Content-Type: application/json" -X POST -d '{"message_id": 3, "author_id": 4, "message": "good morning 5"}' https://publicmessage.herokuapp.com/api/v0/message/</pre>
+            </p>
+            <p>
+                The back end of this application is available at <a href="https://github.com/ttpqc/py">https://github.com/ttpqc/py</a>. For UBER hacker status, go through the source code of the back end and reset my database!
             </p>
         </div>
     </div>
