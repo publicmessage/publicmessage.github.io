@@ -23,10 +23,12 @@ function getMessage(inputTextboxMessage) {
                 // Success!
                 let data = JSON.parse(this.response);
                 console.log(data);
-                if (data.error !== "Not found") {
-                    $('#resultMessage').html(`Someone posted <br> ${data.message} <br> with message id of ${data.id} and author id of ${data.author_id}`);
-                } else {
+                if (data.error === "Not found") {
                     $('#resultMessage').html(`Could not find the message. Hurry, you might be able to snag message id of  ${inputTextboxMessage.value} and claim your spot in hacker fame!`);
+                } else if (data.Status === "Failed" && inputTextboxMessage.value == "") {
+                    console.log("What do you expect me to show you if your query is empty?");
+                } else {
+                    $('#resultMessage').html(`Someone posted <br> ${data.message} <br> with message id of ${data.id} and author id of ${data.author_id}`);
                 }
             } else {
                 // We reached our target server, but it returned an error
@@ -55,6 +57,8 @@ function getAuthor(inputTextboxAuthor) {
                 console.log(data);
                 if (data.error !== "Not found") {
                     $('#resultAuthor').html(`Some information about author with id ${data.id} follows: <br> Full name: ${data.full_name} <br> Email: ${data.email}`);
+                } else if (data.Status === "Failed" && inputTextboxMessage.value == "") {
+                    console.log("What do you expect me to show you if your query is empty?");
                 } else {
                     $('#resultAuthor').html(`Could not find anyone with that author id. Hurry, you could be the super warrior of ${inputTextboxAuthor.value} and claim your spot in hacker fame!`);
                 }
